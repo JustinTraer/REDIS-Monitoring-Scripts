@@ -1,0 +1,17 @@
+#!/bin/sh
+for i in `seq 1 5000`;do clear;date;
+echo 
+echo Redis stats:
+redis-cli info |  egrep "^tot|connect"
+echo
+
+echo "TIME_WAIT Sockets to Redis: `sudo netstat -tunap|grep 6379|grep TIME_WAIT |wc -l`";
+echo "TCP Sockets to Redis: `sudo netstat -tunap|grep 6379|grep -v TIME_WAIT |wc -l`";
+echo "Total TCP Sockets to Redis: `sudo netstat -tunap|grep 6379|wc -l`";
+
+echo "UDS to redis: `sudo netstat -napx|grep redis|wc -l`";
+
+sleep 3;
+
+done;
+
